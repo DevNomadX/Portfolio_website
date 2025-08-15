@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -34,9 +35,12 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Hi, I'm <span class="highlight">SK Monir</span></h1>
+            <h1 class="animate-float">Hi, I'm <span class="highlight">SK Monir</span></h1>
             <p>Web Developer & Designer</p>
-            <a href="#contact" class="cta-button">Get in Touch</a>
+            <div class="cta-container">
+                <a href="#contact" class="cta-button">Get in Touch</a>
+                <a href="#projects" class="cta-button secondary">View My Work</a>
+            </div>
         </div>
     </section>
 
@@ -51,19 +55,19 @@
     <section id="skills" class="skills animate-on-scroll">
         <h2>My Skills</h2>
         <div class="skills-grid">
-            <div class="skill-card">
+            <div class="skill-card" data-tilt>
                 <i class="fab fa-html5"></i>
                 <h3>HTML5</h3>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" data-tilt>
                 <i class="fab fa-css3-alt"></i>
                 <h3>CSS3</h3>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" data-tilt>
                 <i class="fab fa-js"></i>
                 <h3>JavaScript</h3>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" data-tilt>
                 <i class="fab fa-react"></i>
                 <h3>React</h3>
             </div>
@@ -73,13 +77,13 @@
     <section id="projects" class="projects animate-on-scroll">
         <h2>My Projects</h2>
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card" data-tilt>
                 <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8Y29kaW5nfHx8fHx8MTY4NjY4Njc2OA&ixlib=rb-4.0.3&q=80&w=400" alt="Project 1">
                 <h3>Project 1</h3>
                 <p>Description of project 1</p>
                 <a href="#" class="project-link">View Project</a>
             </div>
-            <div class="project-card">
+            <div class="project-card" data-tilt>
                 <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8Y29kaW5nfHx8fHx8MTY4NjY4Njc5OQ&ixlib=rb-4.0.3&q=80&w=400" alt="Project 2">
                 <h3>Project 2</h3>
                 <p>Description of project 2</p>

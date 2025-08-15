@@ -64,3 +64,129 @@ themeToggle.addEventListener('click', () => {
 function updateThemeIcon(theme) {
     themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 }
+
+// Add particle background
+function createParticleBackground() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'particle-background';
+    const hero = document.querySelector('.hero');
+    hero.insertBefore(canvas, hero.firstChild);
+    
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    
+    function resizeCanvas() {
+        canvas.width = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+    }
+    
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 0.5;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if (this.x > canvas.width || this.x < 0 || 
+                this.y > canvas.height || this.y < 0) {
+                this.reset();
+            }
+        }
+        
+        draw() {
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    
+    function init() {
+        particles = Array.from({ length: 100 }, () => new Particle());
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+    
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        init();
+    });
+    
+    resizeCanvas();
+    init();
+    animate();
+}
+
+// Initialize particle background
+createParticleBackground();
+
+// Improved scroll reveal
+const scrollReveal = ScrollReveal({
+    distance: '60px',
+    duration: 1000,
+    delay: 300,
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+});
+
+scrollReveal.reveal('.hero-content', { 
+    delay: 500,
+    origin: 'bottom'
+});
+scrollReveal.reveal('.skill-card', { 
+    interval: 100,
+    origin: 'bottom'
+});
+scrollReveal.reveal('.project-card', { 
+    interval: 200,
+    origin: 'bottom'
+});
+
+// Add tilt effect to project cards
+function initTiltEffect() {
+    const cards = document.querySelectorAll('.project-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', handleTilt);
+        card.addEventListener('mouseleave', resetTilt);
+    });
+}
+
+function handleTilt(e) {
+    const card = e.currentTarget;
+    const cardRect = card.getBoundingClientRect();
+    const centerX = cardRect.left + cardRect.width / 2;
+    const centerY = cardRect.top + cardRect.height / 2;
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    
+    const rotateX = ((mouseY - centerY) / (cardRect.height / 2)) * 10;
+    const rotateY = ((centerX - mouseX) / (cardRect.width / 2)) * 10;
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+}
+
+function resetTilt(e) {
+    const card = e.currentTarget;
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+}
+
+// Initialize tilt effect
+initTiltEffect();
