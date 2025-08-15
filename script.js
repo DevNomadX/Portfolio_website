@@ -1,10 +1,32 @@
-// Mobile menu toggle
+// Improved mobile menu functionality
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
+const navLinksItems = document.querySelectorAll('.nav-links a');
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  hamburger.classList.toggle('open');
+function toggleMenu() {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', toggleMenu);
+
+// Close menu when clicking nav links
+navLinksItems.forEach(item => {
+    item.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) {
+            toggleMenu();
+        }
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('open') && 
+        !navLinks.contains(e.target) && 
+        !hamburger.contains(e.target)) {
+        toggleMenu();
+    }
 });
 
 // Smooth scrolling for anchor links
